@@ -270,7 +270,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/20/djy/" itemprop="url">djy</a></h1>
+                <a class="post-title-link" href="/2019/11/20/djy/" itemprop="url">hexo搭建博客</a></h1>
         
 
         <div class="post-meta">
@@ -322,7 +322,37 @@
       
         
           
-            
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1- 创建github账号，并创建username.github.io仓库</span><br><span class="line">2- 环境搭建，安装git, node.js, hexo</span><br><span class="line">3- 关联github仓库</span><br><span class="line">4- 编写博客</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-创建github账号，并创建username-github-io仓库"><a href="#1-创建github账号，并创建username-github-io仓库" class="headerlink" title="1- 创建github账号，并创建username.github.io仓库"></a>1- 创建github账号，并创建username.github.io仓库</h2><p>在自己的github账号中，创建一个仓库username.github.io；</p>
+<h2 id="2-环境搭建，安装git-node-js-hexo"><a href="#2-环境搭建，安装git-node-js-hexo" class="headerlink" title="2- 环境搭建，安装git, node.js, hexo"></a>2- 环境搭建，安装git, node.js, hexo</h2><ul>
+<li><p>查看自己本地的git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure></li>
+<li><p>查看本地的node</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<p>如果两者没有返回版本号，就需要去安装；</p>
+</li>
+<li><p>安装hexo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>安装成功后，创建blog文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 在你的家目录下创建一个blog文件夹</span><br><span class="line">mkdir blog</span><br><span class="line"># 进入目录</span><br><span class="line">cd blog</span><br><span class="line"># 初始化目录</span><br><span class="line">hexo init</span><br><span class="line">开启本地服务 </span><br><span class="line"># hexo s</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>执行完成后，会提示htto://localhost:4000/，浏览器访问，即可看到博客最初是的原型了。</p>
+<h2 id="关联github仓库"><a href="#关联github仓库" class="headerlink" title="关联github仓库"></a>关联github仓库</h2><p>在blog目录下_config.yml文件中，输入自己的github</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: &apos;git&apos;</span><br><span class="line">  repository: git@github.com:Ben21hao/Ben21hao.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>修改之后，终端遍历到blog目录下，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 产生静态网页</span><br><span class="line">hexo g</span><br><span class="line"># 部署到GitHub page上</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>为了不用每次都输入密码，关联github账号后，需要生成秘钥，做免密提交；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 用你注册GitHub时的邮箱号，进行秘钥生成</span><br><span class="line">cd ~</span><br><span class="line">ssh-keygen -t rsa -C &quot;xxxxxxx@qq.com&quot;</span><br><span class="line"># 系统就会生成一个隐藏文件夹.ssh</span><br><span class="line">cd .ssh</span><br><span class="line">ls</span><br><span class="line"># 复制公钥</span><br><span class="line">vim id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>在文件中，复制秘钥，填入github的SSH and GPG keys中；</p>
+<h2 id="4-编写博客"><a href="#4-编写博客" class="headerlink" title="4- 编写博客"></a>4- 编写博客</h2><p>基本命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客名字&quot;</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+<p>参考：<a href="https://www.jianshu.com/p/77db3862595c" target="_blank" rel="noopener">https://www.jianshu.com/p/77db3862595c</a></p>
+
           
         
       
