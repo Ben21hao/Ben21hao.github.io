@@ -251,6 +251,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/%E5%8F%96%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Meteor">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574251667751&di=a388cffe568126ffe351da06df3fcab0&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F16%2F07%2F09%2F205780eb4c306c2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meteor~blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/21/%E5%8F%96%E5%80%BC/" itemprop="url">取值</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-21T11:28:31+08:00">
+                2019-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###记录一下valueForKeyPath的使用</p>
+<h2 id="数组求和"><a href="#数组求和" class="headerlink" title="数组求和"></a>数组求和</h2><p>在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@13, @23, @89, @3, @4, @46, @&quot;2&quot;];</span><br><span class="line">CGFloat sum = [[array valueForKeyPath:@&quot;@sum.floatValue&quot;] floatValue]; // 180</span><br><span class="line"></span><br><span class="line">NSArray *array5 = @[@&quot;3&quot;, @&quot;4&quot;, @&quot;5&quot;];</span><br><span class="line">CGFloat sum = [[array5 valueForKeyPath:@&quot;@sum.floatValue&quot;] floatValue]; //12</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组内字符串操作"><a href="#数组内字符串操作" class="headerlink" title="数组内字符串操作"></a>数组内字符串操作</h2><ul>
+<li>数组内的字符串，转成大写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;aa&quot;, @&quot;bb&quot;, @&quot;cc&quot;];</span><br><span class="line">NSArray *tmp = [array valueForKeyPath:@&quot;uppercaseString&quot;];</span><br></pre></td></tr></table></figure></li>
+<li>获取字符串的长度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSArray *lengths = [array valueForKeyPath:@&quot;length&quot;];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="数组内字典key取值"><a href="#数组内字典key取值" class="headerlink" title="数组内字典key取值"></a>数组内字典key取值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array1 = @[</span><br><span class="line">  @&#123;@&quot;uid&quot;: @&quot;id001&quot;, @&quot;info&quot;:@&#123;@&quot;owner&quot;: @&quot;zhanSan&quot;, @&quot;code&quot;:@&quot;001&quot;&#125;&#125;,</span><br><span class="line">  @&#123;@&quot;uid&quot;: @&quot;id002&quot;, @&quot;info&quot;:@&#123;@&quot;owner&quot;: @&quot;liSi&quot;, @&quot;code&quot;:@&quot;002&quot;&#125;&#125;,</span><br><span class="line">  @&#123;@&quot;uid&quot;: @&quot;id003&quot;, @&quot;info&quot;:@&#123;@&quot;owner&quot;: @&quot;wangEr&quot;, @&quot;code&quot;:@&quot;003&quot;&#125;&#125;</span><br><span class="line">  ];</span><br><span class="line">    </span><br><span class="line">NSArray *uids = [array1 valueForKeyPath:@&quot;uid&quot;];</span><br></pre></td></tr></table></figure>
+<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array2 = @[@&quot;1&quot;, @&quot;dd&quot;, @&quot;ccc&quot;, @&quot;dd&quot;, @&quot;1&quot;, @&quot;d&quot;, @&quot;d&quot;];</span><br><span class="line">NSArray *rs = [array2 valueForKeyPath:@&quot;@distinctUnionOfObjects.self&quot;];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array3 = @[</span><br><span class="line">                        @&#123;@&quot;name&quot;: @&quot;zhangsan&quot;, @&quot;age&quot;: @&quot;1&quot;&#125;,</span><br><span class="line">                        @&#123;@&quot;name&quot;: @&quot;zhangsan&quot;, @&quot;age&quot;: @&quot;1&quot;&#125;,</span><br><span class="line">                        @&#123;@&quot;name&quot;: @&quot;lisi&quot;, @&quot;age&quot;: @&quot;2&quot;&#125;</span><br><span class="line">                        ];</span><br><span class="line">    </span><br><span class="line">NSArray * arr = [array3 valueForKeyPath:@&quot;@distinctUnionOfObjects.name&quot;];</span><br></pre></td></tr></table></figure>
+
+<h2 id="多层字典嵌套取值"><a href="#多层字典嵌套取值" class="headerlink" title="多层字典嵌套取值"></a>多层字典嵌套取值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSDictionary *dic = @&#123;</span><br><span class="line">                          @&quot;key1&quot;: @&#123;</span><br><span class="line">                                  @&quot;key2&quot;: @&#123;</span><br><span class="line">                                          @&quot;key3&quot;: @&quot;lisi002&quot;</span><br><span class="line">                                          &#125;</span><br><span class="line">                                  &#125;</span><br><span class="line">                          &#125;;</span><br><span class="line">NSString *key = [dic valueForKeyPath:@&quot;key1.key2.key3&quot;];</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组内模型取值"><a href="#数组内模型取值" class="headerlink" title="数组内模型取值"></a>数组内模型取值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;aa&quot;, @&quot;bb&quot;, @&quot;cc&quot;];</span><br><span class="line"></span><br><span class="line">NSMutableArray *peoples = [NSMutableArray arrayWithCapacity:array.count];</span><br><span class="line">for (int i = 0; i &lt; array.count; i++) &#123;</span><br><span class="line">    People *p = [[People alloc]init];</span><br><span class="line">    p.name = array[i];</span><br><span class="line">    p.age = i;</span><br><span class="line">    [peoples addObject:p];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSArray *names = [peoples valueForKeyPath:@&quot;name&quot;];</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/20/djy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -569,7 +705,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -577,6 +713,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
