@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CPUImage</title>
+    <url>/2019/11/29/CPUImage/</url>
+    <content><![CDATA[<h3 id="CPUImage-相关的代码记录"><a href="#CPUImage-相关的代码记录" class="headerlink" title="CPUImage 相关的代码记录"></a>CPUImage 相关的代码记录</h3>]]></content>
+      <tags>
+        <tag>IOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔</title>
+    <url>/2019/11/27/%E9%9A%8F%E7%AC%94/</url>
+    <content><![CDATA[<p>###分类 category：<br>######用处：<br>1- 为主类添加新方法<br>2- 重写父类方法；</p>
+<p>说明：</p>
+<ul>
+<li>.h/.m文件</li>
+<li>类的补丁；在不能修改主类的内部源码时，又需要添加新功能，则可以用分类添加；</li>
+<li>一个类，可以添加多个分类，但要保证类别名称的唯一性；</li>
+<li>可以添加方法，不能添加成员变量；</li>
+<li>分类中的方法名，与主类的重名时，分类中的方法优先级比主类的高；</li>
+<li>两个分类中，有方法名重名时，执行的顺序在xcode中：targets-&gt;Build Phases-&gt;Complie Source调整，由上到下的顺序；</li>
+<li>分类声明的方法，可以不实现，编译器不会产生警告；</li>
+</ul>
+<p>###扩展 extension：<br>######作用：<br>为当前类添加属性和方法</p>
+<p>说明：</p>
+<ul>
+<li>只有.h文件；声明的方法，直接在主类的.m文件中实现；</li>
+<li>可以声明方法和成员变量；属于私有的，在主类中import该文件；</li>
+</ul>
+<p>delegate使用weak，为何不使用assign？</p>
+<p>assign：<br>assign 指针赋值，不对引用计数操作，使用之后如果没有置为nil，可能会产生野指针。<br>delegate指向的对象销毁之后，delegate中依然会保存之前对象的地址，delegate就成了野指针。</p>
+<p>weak 指明该对象并不负责保持delegate这个对象，delegate这个对象的销毁是由外部控制的，当delegate指向的对象销毁之后，delegate = nil。</p>
+<p>####成员变量：<br>_name</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@interface ViewController () &#123;</span><br><span class="line">    NSString *name;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>@dynamic告诉编译器不自动生成setter/getter方法<br>只能使用-&gt;调用，不能用点语法(.)来访问 self-&gt;name</p>
+<p>####属性：<br>self.name<br>@property 声明的属性<br>@synthesize告诉编译器自动生成setter/getter方法<br>属性用点语法调用</p>
+<p>###static，extern，const关键字的使用<br>这三个关键字的使用，设计到两个概念：<br><code>生命周期</code>: 变量能存活多久，占用的内存什么时候被回收；<br><code>作用域</code>: 变量在什么区域可以拿来用；</p>
+<ul>
+<li>static<br>1- 修饰局部变量<br><code>局部变量</code>: 存储在栈区，出了代码块，局部变量就会被销毁，内存就会被回收；<br>使用static修饰局部变量，此时局部变量被称为<code>静态局部变量</code>，存储的地方发生了改变，存储在<code>静态存储区</code>；<br>这个变量的<code>生命周期</code>也就发生了变化，是整个源程序，即程序结束后才会释放它的内存；作用域不变；</li>
+</ul>
+<p>2- 修饰全局变量<br><code>全局变量</code>： 存储在<code>静态存储区</code>，生命周期是整个源程序，作用域是整个程序；<br>使用static修饰全局变量，<code>作用域</code>发生了变化，只限声明它的文件可见；生命周期不变；</p>
+<ul>
+<li><p>extern<br>用来引用全局变量；</p>
+</li>
+<li><p>const<br>将变量设置成常量；<br>const修饰的是其右边的值，也就是const右边的这个整体的值不能改变。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">static NSString const *name = @&quot;abc&quot;;</span><br><span class="line">static const NSString *name = @&quot;bac&quot;;   //两种写法等价</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NSString const *str = @&quot;123&quot;;    // *前面，值不变</span><br><span class="line">NSString * const str = @&quot;123&quot;;    // *后面，地址不变</span><br></pre></td></tr></table></figure>
+<p>*后面，地址不变：<br>常量h指针已经指向了@”123”，不能再指向其他的内存，所以不能修改指针指向的内容；如果地址不变，那等同于内容不会变；</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NSMutableString const *var1  //*前面，可以修改值和指针</span><br><span class="line">NSMutableString *const var2  //*后面，可以修改值，地址不能变；</span><br></pre></td></tr></table></figure>
+
+<p>###Podfile中的 use_frameworks!</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">A、用cocoapods 导入swift 框架 到 swift项目和OC项目都必须要 use_frameworks!</span><br><span class="line">B、使用 dynamic frameworks，必须要在Podfile文件中添加 use_frameworks!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use_frameworks! -&gt; dynamic frameworks 方式 -&gt; .framework</span><br><span class="line">#use_frameworks! -&gt; static libraries 方式 -&gt; .a</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">swift项目cocoapods 默认 use_frameworks!</span><br><span class="line">OC项目cocoapods 默认 #use_frameworks!</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>取值</title>
     <url>/2019/11/21/%E5%8F%96%E5%80%BC/</url>
     <content><![CDATA[<p>###记录一下valueForKeyPath的使用</p>
