@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="###记录一下valueForKeyPath的使用 数组求和在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和： 12345NSArray *array = @[@13, @23, @89, @3, @4, @46, @&amp;quot;2&amp;quot;];CGFloat sum = [[array valueForKeyPath:@&amp;quot;@sum.floatValue">
+<meta name="description" content="记录一下valueForKeyPath的使用数组求和在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和： 12345NSArray *array = @[@13, @23, @89, @3, @4, @46, @&amp;quot;2&amp;quot;];CGFloat sum = [[array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quo">
 <meta name="keywords" content="iOS开发架构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="取值">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;21&#x2F;%E5%8F%96%E5%80%BC&#x2F;index.html">
 <meta property="og:site_name" content="Meteor~blog">
-<meta property="og:description" content="###记录一下valueForKeyPath的使用 数组求和在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和： 12345NSArray *array = @[@13, @23, @89, @3, @4, @46, @&amp;quot;2&amp;quot;];CGFloat sum = [[array valueForKeyPath:@&amp;quot;@sum.floatValue">
+<meta property="og:description" content="记录一下valueForKeyPath的使用数组求和在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和： 12345NSArray *array = @[@13, @23, @89, @3, @4, @46, @&amp;quot;2&amp;quot;];CGFloat sum = [[array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-21T08:18:09.226Z">
+<meta property="og:updated_time" content="2019-12-04T06:54:23.758Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -392,8 +392,7 @@
       
 
       
-        <p>###记录一下valueForKeyPath的使用</p>
-<h2 id="数组求和"><a href="#数组求和" class="headerlink" title="数组求和"></a>数组求和</h2><p>在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和：</p>
+        <h3 id="记录一下valueForKeyPath的使用"><a href="#记录一下valueForKeyPath的使用" class="headerlink" title="记录一下valueForKeyPath的使用"></a>记录一下valueForKeyPath的使用</h3><h2 id="数组求和"><a href="#数组求和" class="headerlink" title="数组求和"></a>数组求和</h2><p>在数组内，所有元素都是NSNumber类型，或者是数字的字符串组成，可以直接求和：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@13, @23, @89, @3, @4, @46, @&quot;2&quot;];</span><br><span class="line">CGFloat sum = [[array valueForKeyPath:@&quot;@sum.floatValue&quot;] floatValue]; // 180</span><br><span class="line"></span><br><span class="line">NSArray *array5 = @[@&quot;3&quot;, @&quot;4&quot;, @&quot;5&quot;];</span><br><span class="line">CGFloat sum = [[array5 valueForKeyPath:@&quot;@sum.floatValue&quot;] floatValue]; //12</span><br></pre></td></tr></table></figure>
 
 <h2 id="数组内字符串操作"><a href="#数组内字符串操作" class="headerlink" title="数组内字符串操作"></a>数组内字符串操作</h2><ul>
@@ -614,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组求和"><span class="nav-text">数组求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内字符串操作"><span class="nav-text">数组内字符串操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内字典key取值"><span class="nav-text">数组内字典key取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组去重"><span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多层字典嵌套取值"><span class="nav-text">多层字典嵌套取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内模型取值"><span class="nav-text">数组内模型取值</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录一下valueForKeyPath的使用"><span class="nav-text">记录一下valueForKeyPath的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组求和"><span class="nav-text">数组求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内字符串操作"><span class="nav-text">数组内字符串操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内字典key取值"><span class="nav-text">数组内字典key取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组去重"><span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多层字典嵌套取值"><span class="nav-text">多层字典嵌套取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组内模型取值"><span class="nav-text">数组内模型取值</span></a></div>
             
 
           </div>
